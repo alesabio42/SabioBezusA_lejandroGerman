@@ -1,2 +1,6 @@
 # SabioBezusA_lejandroGerman
-Utilizado para los trabajos con Silicon
+CURSO DE PROGRAMACI'ON FULL STACK
+COMISION B
+Silicon Misiones - https://siliconmisiones.gob.ar/
+ALEJANDRO GERMAN SABIO BEZUS
+ESTE REPOSITORIO FUE CREADO CON FINES ACAD'EMICOS. CONTIENE LOS EJERCICIOS RESULETOS EN LA CURSADA 2022.
