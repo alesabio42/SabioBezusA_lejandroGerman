@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script type="text/javascript">
+function info(cadena) {
+    var resultado = "La cadena \""+ cadena +"\"";
+    
+    if (cadena == cadena.toUpperCase ( )) {
+        resultado += " está formada sólo por letras mayúsculas";
+    }
+    else if (cadena == cadena.toLowercase()) {
+        resultado += "está formada sólo por letras minúsculas";
+    }
+    else if (cadena == cadena.toLowercase ()) {
+        resultado += " está formada por letras mayúsculas y minúsculas";
+    }
+    return resultado;
+}
+alert(info("boca es lo más lindo..."));
+alert(info("Boca es Lo MÁS lindo..."));
+alert(info("BOCA ES LO MÁS LINDO..."));
+
+</script>
+</body>
+</html>

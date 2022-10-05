@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> TRABAJO 2 - EJERCICIO 1</title>
+</head>
+
+<body>
+    <h1> TRABAJO 2 - EJERCICIO 1</h1>
+    <script type="text/javascript">
+var verdadero;
+var char;
+const valores = [verdadero, false, 2, "hola", "mundo", 3, char];
+var max = 0;
+var maxString;
+
+valores.forEach( function( val ) {
+  if( ( typeof( val ) == 'string' ) && ( val.length > max ) ) {
+    max = val.length;
+    maxString = val;
+  }
+} );
+document.write( "1. La palabra con más letras es: "+maxString );
+document.write("<br>");
+document.write("<br>");
+// 2.  Imprimir los elementos de menor a mayor cantidad de letras.
+var nuevostring=[];
+
+for(let i=0; i < valores.length; i++){
+if(typeof valores[i]==="string"){
+nuevostring.push (valores[i]);
+}
+}
+document.write ("Imprimir los elementos de menor a mayor: "+"<br>"+nuevostring.sort (function(a,b){return a.lenght - b.lenght})+"<br>");
+document.write("<br>");
+
+// 3.  Cinco operaciones matemáticas
+
+let valA = null;
+let valB = null;
+
+valores.forEach(e =>{
+  if(typeof e === 'number'){
+    
+    if(valA == null){
+      valA = e;
+    }else if(valB == null){
+      valB = e;
+    }
+  }
+});
+
+document.write("3a. " + valA + " + " + valB + " = " + (valA + valB) +"<br>");
+document.write("3b. " + valA + " - " + valB + " = " + (valA - valB) +"<br>");
+document.write("3c. " + valA + " * " + valB + " = " + (valA * valB) +"<br>");
+document.write("3d. " + valA + " / " + valB + " = " + (valA / valB) +"<br>");
+
+document.write ("Imprimir los elementos de menor a mayor: "+"<br>"+valString.sort (function(a,b){return a.lenght - b.lenght})+"<br>");
+</script>
+    </body>
+</html>

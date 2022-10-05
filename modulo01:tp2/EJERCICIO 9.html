@@ -1,0 +1,22 @@
+<script>
+function getNotas (misNotas) {
+    var i = 0, summ = 0, ArrayLen = misNotas.length;
+    while (i<ArrayLen){
+        summ = summ + misNotas [i++];
+    }
+    return summ / ArrayLen;s
+}
+var misNotas = [10,6,10,6,10];
+var a = getNotas (misNotas);
+if( a < 5) {
+    resultado = "REPROBADO";
+    }
+    else if (a<8) {
+    resultado = "APROBADO";
+    }
+    else {
+    resultado = "SOBRESALIENTE"
+}
+
+console.log(resultado)
+</script>
