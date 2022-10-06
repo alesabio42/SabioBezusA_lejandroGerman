@@ -1,5 +1,5 @@
 # SabioBezusA_lejandroGerman
-MÓDULO 1 - Nivelación y fundamentos de la Programación
+# MÓDULO 1 - Nivelación y fundamentos de la Programación
 Ejercicio 1:
 a) Abrir el editor HTML.
 b) Archivo Nuevo.
@@ -54,7 +54,7 @@ alert (`El segundo numero ahora es ${num2} ` );
 </script>
 </body>
 </html>
-Ejercicio 4:
+##Ejercicio 4:
 Copiar el siguiente código dentro de un archivo, luego guardarlo con el nombre:
 “Ejercicio4.html”. Ejecuta el programa en el navegador.
 <html>
