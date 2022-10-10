@@ -1,14 +1,24 @@
 # SabioBezusA_lejandroGerman
 # MÓDULO 1 - Nivelación y fundamentos de la Programación
-Ejercicio 1:
+**Ejercicio 1:**
 a) Abrir el editor HTML.
+
 b) Archivo Nuevo.
-c) Copiar el código que empieza por <!DOCTYPE html> siguiente.
+
+c) Copiar el código que empieza por 
+```bash
+<!DOCTYPE html>
+```
+
 d) Menú... Archivo... Guardar como: Ejercicio1.html
+
 e) Abrir el archivo Ejercicio1.html en el navegador
+
 f) Después del primer mensaje, se debe mostrar otro mensaje que diga "Soy el primer
 script"
+
 g) Agregar comentarios que expliquen el funcionamiento del código.
+```bash
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +30,12 @@ document.writeln("Hola Mundo!");
 </script>
 </body>
 </html>
-Ejercicio 2:
+```
+
+**Ejercicio 2:**
 Copiar el siguiente código dentro de un archivo, luego guardarlo con el nombre:
 “Ejercicio2.html”. Ejecuta el programa en el navegador.
+```bash
 <!DOCTYPE html>
 <html>
 <body>
@@ -38,9 +51,11 @@ alert (`La división de A/B es: ${resultado=A/B} ` );
 </script>
 </body>
 </html>
-Ejercicio 3:
+```
+**Ejercicio 3:**
 Copiar el siguiente código dentro de un archivo, luego guardarlo con el nombre:
 “Ejercicio3.html”. Ejecuta el programa en el navegador.
+```bash
 <!DOCTYPE html>
 <html>
 <body>
@@ -54,9 +69,11 @@ alert (`El segundo numero ahora es ${num2} ` );
 </script>
 </body>
 </html>
-##Ejercicio 4:
+```
+**Ejercicio 4:**
 Copiar el siguiente código dentro de un archivo, luego guardarlo con el nombre:
 “Ejercicio4.html”. Ejecuta el programa en el navegador.
+```bash
 <html>
 <body>
 <script type="text/javascript">
@@ -71,12 +88,14 @@ document.write(A + B );
 <p>El signo '+' sirve para concatenar cadenas de texto</p>
 </body>
 </html>
-Ejercicio 5:
+```
+**Ejercicio 5:**
 Copiar el siguiente código dentro de un archivo, luego guardarlo con el nombre:
 Ejercicio5.html’. Ejecuta el programa en el navegador.
 Obs: El siguiente código tiene un error, para corregirlo se debe depurar el código en el
 navegador.
 Depurar con chrome: https://developer.chrome.com/docs/devtools/javascript/
+```bash
 <!DOCTYPE html>
 <html><body>
 <script type="text/javascript">
@@ -90,12 +109,15 @@ document.write(`El producto de a por b es ${result} `);
 <p>Los puntos de interrupción son fundamentales para programar</p>
 </body>
 </html>
-Ejercicio 6:
+```
+**Ejercicio 6:**
 Crear un array llamado “dias” y que almacene el nombre de los siete días de la semana.
 Mostrar por pantalla los siete nombres utilizando la función console.log().
-Ejercicio 7:
+
+**Ejercicio 7:**
 Ejecutar el programa en el navegador. Guardarlo con el nombre: Ejercicio7.html’ Pasar
 valores por teclado. Anotar con comentarios que hace el programa.
+```bash
 <!DOCTYPE html>
 <html>
 <body>
@@ -108,9 +130,11 @@ document.write(resultado);
 </script>
 </body>
 </html>
-Ejercicio 8:
+```
+**Ejercicio 8:**
 Copiar el siguiente código dentro de un archivo, luego guardarlo con el nombre:
 Ejercicio8.html’. Ejecuta el programa en el navegador.
+```bash
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
@@ -129,10 +153,12 @@ document.write(`<br/> <br/> La suma es ${resultado} ` );
 <p>Para sumar, las variables deben ser numéricas.</p>
 </body>
 </html>
-Ejercicio 9:
+```
+**Ejercicio 9:**
 Crear un archivo: Ejercicio9.html’. Declarar un array llamado “vocales” con las 5 letras.
 Luego se deben imprimir en el navegador uno debajo de otro.
-Ejercicio 10:
+
+**Ejercicio 10:**
 Crear un archivo: Ejercicio10.html’ Declarar un array llamado “meses” y que tenga
 guardado los meses del año. Luego el usuario debe poder tipear en el navegador un
 número de 1 al 12 y este le devolverá el nombre del mes. Por ejemplo escribe 5 debe
