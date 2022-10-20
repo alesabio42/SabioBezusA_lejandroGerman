@@ -49,7 +49,11 @@ select emp.NOMBRE, emp.APELLIDO, depto.NOMBRE, depto.PRESUPUESTO, depto.ESTADO
 		on emp.id_departamento =  depto.iddepartamento
         order by depto.NOMBRE asc, emp.APELLIDO asc, emp.NOMBRE asc;
 -- 22. Devuelve un listado con el código y el nombre del departamento, solamente de aquellos departamentos que tienen empleados.
-
+select depto.iddepartamento, depto.nombre
+	from empleados as emp
+    inner join departamentos as depto
+		on emp.id_departamento =  depto.iddepartamento;
+		
 -- 23.	Devuelve el nombre del departamento donde trabaja el empleado que tiene el cuit 27-38382980-3.
 select depto.NOMBRE
 	from departamentos as depto
