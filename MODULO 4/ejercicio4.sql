@@ -209,6 +209,128 @@ INSERT INTO EMPLEADOS VALUES(1, 4208747, 'alejandro terra','20/07/1999', '20-10-
 INSERT INTO EMPLEADOS VALUES(2, 4208747, 'alejandro torero','20/07/1996', '20-10-1994', 'alejandrorewrw@gmail.com',1,1);
 INSERT INTO EMPLEADOS VALUES(3, 4208747, 'alejandro cartera','20/07/1995', '20-10-1999', 'alejandrowrwer@gmail.com',1,1);
 
+-- EJERCICIO 3--
+-- Schema RESEERVA
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `RESEERVA` DEFAULT CHARACTER SET utf8 ;
+USE `RESEERVA` ;
+
+-- -----------------------------------------------------
+-- Table `RESEERVA`.`RESERVA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `RESEERVA`.`RESERVA` (
+  `idRESERVA` INT NOT NULL,
+  `FechaInicio` VARCHAR(45) NOT NULL,
+  `FechaFin` VARCHAR(45) NOT NULL,
+  `PrecioTotal` VARCHAR(45) NOT NULL,
+  `CLIENTE_CodCliente` INT NOT NULL,
+  PRIMARY KEY (`idRESERVA`, `CLIENTE_CodCliente`),
+  INDEX `fk_RESERVA_CLIENTE1_idx` (`CLIENTE_CodCliente` ASC) VISIBLE,
+  CONSTRAINT `fk_RESERVA_CLIENTE1`
+    FOREIGN KEY (`CLIENTE_CodCliente`)
+    REFERENCES `RESEERVA`.`CLIENTE` (`CodCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+
+-- -----------------------------------------------------
+-- Table `RESEERVA`.`AVALES`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `RESEERVA`.`AVALES` (
+  `AVALADO` INT NOT NULL,
+  `AVALADOR` VARCHAR(45) NOT NULL,
+  `CLIENTE_CodCliente` INT NOT NULL,
+  PRIMARY KEY (`AVALADO`, `CLIENTE_CodCliente`),
+  INDEX `fk_AVALES_CLIENTE1_idx` (`CLIENTE_CodCliente` ASC) VISIBLE,
+  CONSTRAINT `fk_AVALES_CLIENTE1`
+    FOREIGN KEY (`CLIENTE_CodCliente`)
+    REFERENCES `RESEERVA`.`CLIENTE` (`CodCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `RESEERVA`.`CLIENTE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `RESEERVA`.`CLIENTE` (
+  `CodCliente` INT NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Dirección` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(45) NULL,
+  `DNI` VARCHAR(45) NOT NULL,
+  `AVALES_AVALADO` INT NOT NULL,
+  `AVALES_CLIENTE_CodCliente` INT NOT NULL,
+  PRIMARY KEY (`CodCliente`, `AVALES_AVALADO`, `AVALES_CLIENTE_CodCliente`),
+  INDEX `fk_CLIENTE_AVALES1_idx` (`AVALES_AVALADO` ASC, `AVALES_CLIENTE_CodCliente` ASC) VISIBLE,
+  UNIQUE INDEX `DNI_UNIQUE` (`DNI` ASC) VISIBLE,
+  CONSTRAINT `fk_CLIENTE_AVALES1`
+    FOREIGN KEY (`AVALES_AVALADO` , `AVALES_CLIENTE_CodCliente`)
+    REFERENCES `RESEERVA`.`AVALES` (`AVALADO` , `CLIENTE_CodCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `RESEERVA`.`RESERVA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `RESEERVA`.`RESERVA` (
+  `idRESERVA` INT NOT NULL,
+  `FechaInicio` VARCHAR(45) NOT NULL,
+  `FechaFin` VARCHAR(45) NOT NULL,
+  `PrecioTotal` VARCHAR(45) NOT NULL,
+  `CLIENTE_CodCliente` INT NOT NULL,
+  PRIMARY KEY (`idRESERVA`, `CLIENTE_CodCliente`),
+  INDEX `fk_RESERVA_CLIENTE1_idx` (`CLIENTE_CodCliente` ASC) VISIBLE,
+  CONSTRAINT `fk_RESERVA_CLIENTE1`
+    FOREIGN KEY (`CLIENTE_CodCliente`)
+    REFERENCES `RESEERVA`.`CLIENTE` (`CodCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `RESEERVA`.`COCHE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `RESEERVA`.`COCHE` (
+  `idmatricula` INT NOT NULL,
+  `Marca` VARCHAR(45) NOT NULL,
+  `Modelo` VARCHAR(45) NOT NULL,
+  `Color` VARCHAR(45) NOT NULL,
+  `PrecioHora` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idmatricula`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `RESEERVA`.`RESERVA_has_COCHE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `RESEERVA`.`RESERVA_has_COCHE` (
+  `RESERVA_idRESERVA` INT NOT NULL,
+  `COCHE_idmatricula` INT NOT NULL,
+  `litroscombustible` FLOAT NOT NULL,
+  PRIMARY KEY (`RESERVA_idRESERVA`, `COCHE_idmatricula`),
+  INDEX `fk_RESERVA_has_COCHE_COCHE1_idx` (`COCHE_idmatricula` ASC) VISIBLE,
+  INDEX `fk_RESERVA_has_COCHE_RESERVA_idx` (`RESERVA_idRESERVA` ASC) VISIBLE,
+  CONSTRAINT `fk_RESERVA_has_COCHE_RESERVA`
+    FOREIGN KEY (`RESERVA_idRESERVA`)
+    REFERENCES `RESEERVA`.`RESERVA` (`idRESERVA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_RESERVA_has_COCHE_COCHE1`
+    FOREIGN KEY (`COCHE_idmatricula`)
+    REFERENCES `RESEERVA`.`COCHE` (`idmatricula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
 
 
 
