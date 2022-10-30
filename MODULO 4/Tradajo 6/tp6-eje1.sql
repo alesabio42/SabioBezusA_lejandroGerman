@@ -13,8 +13,8 @@ CREATE TABLE `provincias` (
   `nombre` varchar(45) DEFAULT NULL,
   `idpais` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_provincias_idpaisx` (`idpais`),
-  CONSTRAINT `fk_provincias_idpaisx` FOREIGN KEY (`idpais`) REFERENCES `paises` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `fk_provincias_paises1_idx` (`idpais`),
+  CONSTRAINT `fk_provincias_paises1_idx` FOREIGN KEY (`idpais`) REFERENCES `paises` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 );
 
 CREATE TABLE `localidades` (
@@ -26,6 +26,7 @@ CREATE TABLE `localidades` (
   KEY `fk_localidades_provincias1_idx` (`id_provincia`),
   CONSTRAINT `fk_localidades_provincias1` FOREIGN KEY (`id_provincia`) REFERENCES `provincias` (`id`)
 ); 
+
 -- 2.	Modificar la tabla empleados usando ALTER TABLE y agregar los campos:
 --       ●	direccion (varchar)
 --       ●	id_localidad (pk localidad) –Esta es un relación con la tabla localidades
@@ -121,18 +122,96 @@ CREATE TABLE `cajas` (
 
 -- 7.	Insertar 5 registros en cada tabla del punto 6. Tener en cuenta que el script debe ejecutarse secuencialmente y no fallar.
 INSERT INTO `productos` VALUES (1,'Camiseta','Boca',NULL,4,10000,'1',NULL),(2,'Pantalon','River',NULL,1,10000,'0',NULL),(3,'Media','Nike',NULL,2,1000,'1',NULL),(4,'Musculosa','Racing',NULL,5,2000,'0',NULL),(5,'Short','Platense',NULL,1,2000,'1',NULL);
-INSERT INTO `marcas` VALUES (1,'Nike','Calidad',NULL,NULL,'0',NULL),(2,'Adidas','Buen precio',NULL,NULL,'1',NULL),(3,'Puma','Calidad Intermedia',NULL,3,'0',NULL),(4,'Crocs','Comodas',NULL,4,'0',NULL),(5,'Lacoste','Buen precio',NULL,9,'1',NULL);
+INSERT INTO `elsistema`.`marcas` (`id`, `nombre`, `descripción`, `id_proveedor`) VALUES ('1', 'Nike', 'Buenisimo', '1'),('2', 'Adidas', 'Buenisimo', '2'),('3', 'Puma', 'Buenardo', '3'),('4', 'Buena calidad', 'Buenisimo', '4'),('5', 'Topper', 'Bueno', '5');
 INSERT INTO `proveedores` VALUES (1,'Nike SA','Sergio','Garrido','contractural','30-99225432-5',1,NULL,NULL),(2,'Puma SA','Tertien','Lopez','contractural','30-40392032-8',2,NULL,NULL),(3,'Adidas SA','Roberto','Fulge','contractural','25-3070808266-9',3,NULL,NULL),(4,'Nike SA','Roberto','Carlos','contractural','30-307080999-9',4,NULL,NULL),(5,'Lacoste sa','Juan','Carlos','contractural','30-45678909-9',3,NULL,NULL);
 INSERT INTO `cajas` VALUES (1,'2022-05-04 09:00:00','2022-05-04 12:00:00','1',NULL),(2,'2022-05-24 08:00:00','2022-05-24 12:30:00','1',NULL),(3,'2022-10-29 07:00:00','2022-10-29 12:30:00','1',NULL),(4,'2022-10-29 11:00:00','2022-10-29 20:00:00','1',NULL),(5,'2022-10-29 17:00:00','2022-10-29 22:00:00','1',NULL);
+
 -- 8.	Listar el nombre, presupuesto, gastos y diferencia(presupuesto-gasto) de todos los departamentos con estado activo o 1.
 SELECT nombre, presupuesto, gasto, (presupuesto-gasto) as diferencia 
 FROM elsistema.departamentos 
 where estado=1;
--- VER 9.	Listar todas todas las localidades agrupadas por pais. En la vista se deberia ver el nombre del pais y el nombre de la localidad
-
+-- VER 9.	Listar todas todas las localidades agrupadas por pais. En la vista se deberia ver el nombre del pais y el nombre de la localidad 
+SELECT paises.nombre, localidades.nombre
+FROM paises
+inner join provincias on provincias.idpais=paises.id
+inner join localidades on id_provincia=provincias.id
+order by paises.nombre;
 
 -- 10.	Modificar (UPADTE):
 --       ●	el telefono de un empleado cuando el id es igual a uno que hayan declarado. 
 UPDATE `elsistema`.`empleados` SET `telefono` = '37567898765' WHERE (`idemplaedo` = '1');
 --       ●	el fecha_ingreso y la localidad de otro empleado.
 UPDATE `elsistema`.`empleados` SET `fecha_ingreso` = '2020-06-02', `id_departamento` = '3' WHERE (`idemplaedo` = '3');
+
+-- 11.	Insertar 5 vendedores.
+INSERT INTO `vendedores` VALUES 
+(1,'Carlos','Sabio','23-41355484-7',2),
+(2,'Santiago','Bezus','23-34561254-7',3),
+(3,'Pedro','Jacinto','23-24322145-7',4),
+(4,'Lucas','Del prado','23-34567548-7',5),
+(5,'Juan Cruz','Del potro','23-41451232-7',1);
+
+-- 12.	Modificar la   tabla   movimientos   y   agregar   los   campos:   id_producto   fk,   estado, tms(timestamp), tipo_movimiento (ingreso, egreso, pedido)
+ALTER TABLE `elsistema`.`movimientos` 
+ADD COLUMN `id_producto` INT NULL AFTER `id_vendedor`,
+ADD COLUMN `estado` VARCHAR(45) NULL AFTER `id_producto`,
+ADD COLUMN `tms` TIMESTAMP NULL AFTER `estado`,
+ADD COLUMN `tipo_movimiento` VARCHAR(45) NULL AFTER `tms`;
+
+ALTER TABLE `elsistema`.`movimientos` 
+ADD INDEX `movimiento_ibfk_3` (`id_producto` ASC) VISIBLE;
+;
+ALTER TABLE `elsistema`.`movimientos` 
+ADD CONSTRAINT `movimiento_ibfk_3`
+  FOREIGN KEY (`id_producto`)
+  REFERENCES `elsistema`.`productos` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+-- 13.	Insertar 5 movimientos distintos.
+INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('10', '10', '2022-10-10', '1', '1', '1', '2022-10-10 12:00:00', 'ingreso');
+INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('14', '5', '2022-10-12', '1', '1', '1', '2022-10-12 10:00:00', 'egreso');
+INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('15', '10', '2022-10-14', '1', '1', '1', '2022-10-14 12:00:00', 'ingreso');
+INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('16', '4', '2022-10-14', '1', '3', '1', '2022-10-14 14:00:00', 'egreso');
+INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('17', '4', '2022-10-16', '2', '4', '1', '2022-10-16 12:00:00', 'egreso');
+
+-- 14.	Borrar lógicamente (UPDATE de la columna estado):
+--       ●	2 movimientos que fueron cargados mal
+DELETE FROM `elsistema`.`movimientos` WHERE (`id` = '10');
+DELETE FROM `elsistema`.`movimientos` WHERE (`id` = '14');
+
+--       ●	un pais que tenga al menos 3 localidades
+DELETE FROM `elsistema`.`paises` WHERE (`id` = '1');
+
+-- 15.	Modificar el campo stock de la tabla productos teniendo en cuenta la cantidad de la tabla de movimientos. Sumar el stock si es un ingreso, restar si es un egreso. Esto hacerlo de manera manual en base los 5 movimientos insertados en el punto 13. Es decir deben haber 5 updates de la tabla producto.
+-- Listamos el ingreso
+SELECT * FROM elsistema.movimientos, elsistema.productos
+WHERE (elsistema.movimientos.id_producto=elsistema.productos.id and tipo_movimiento="ingreso");
+-- Sumamos stock
+UPDATE `elsistema`.`productos`, `elsistema`.`movimientos` SET `stock` = stock+1 
+WHERE elsistema.movimientos.id_producto=elsistema.productos.id and elsistema.movimientos.tipo_movimiento="ingreso";
+-- Listamos el egreso
+SELECT * FROM elsistema.movimientos, elsistema.productos
+WHERE (elsistema.movimientos.id_producto=elsistema.productos.id and tipo_movimiento="egreso");
+-- Restamos el egreso
+UPDATE `elsistema`.`productos`, `elsistema`.`movimientos` SET `stock` = stock-1 
+WHERE elsistema.movimientos.id_producto=elsistema.productos.id and elsistema.movimientos.tipo_movimiento="egreso";
+
+-- 16.	Cear la tabla parametros (id, tms,cosas(json), id_usuario)
+CREATE TABLE `parametros` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tms` timestamp NULL DEFAULT NULL,
+  `cosas` json DEFAULT NULL,
+  `id_usuario` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`));
+-- 17.	Insertar en la tabla parametros teniendo en cuenta la columna cosas:
+--       ●	{"idDeLaCosa": 101, "permisos": "PUT, GET"}
+--       ●	{"vistasPermitidas":"menuPrincipal,menuSecundario,ventas,estadisticaVentas,listaCliente", “grupo": "ventas"}
+--       ●	{"zonaHoraria": "America/Argentina/BuenosAires"}
+--       ●	{"fechaInicioActividades": 01/01/2019, "mesAperturaCaja": "Enero", "mesCierreCaja": "Diciembre"}
+--       ●	{"balancesAniosAnteriores":	{"2019":	{"ingreso":	"7374901.93","egreso": "3732538,75"},"2020":{"ingreso": "27442665,12","egreso": "8522331,82"},"2021": {"ingreso": "31634912,57","egreso": "9757142,66"}}}
+INSERT INTO `parametros` VALUES (4,'2022-10-23 03:00:00','{\"permisos\": \"PUT, GET\", \"idDeLaCosa\": 101}',1),
+(5,'2022-10-23 03:00:00','{\"zonaHoraria\": \"America/Argentina/BuenosAires\"}',2),
+(6,'2022-10-23 03:00:00','{\"grupo\": \"ventas\", \"vistasPermitidas\": \"menuPrincipal,menuSecundario,ventas,estadisticaVentas,listaCliente\"}',3),
+(7,'2022-10-23 03:00:00','{\"mesCierreCaja\": \"Diciembre\", \"mesAperturaCaja\": \"Enero\", \"fechaInicioActividades\": \"01-01-2019\"}',1),
+(8,'2022-10-23 03:00:00','{\"balancesAniosAnteriores\": {\"2019\": {\"egreso\": \"3732538,75\", \"ingreso\": \"7374901.93\"}, \"2020\": {\"egreso\": \"8522331,82\", \"ingreso\": \"27442665,12\"}, \"2021\": {\"egreso\": \"9757142,66\", \"ingreso\": \"31634912,57\"}}}',2);
