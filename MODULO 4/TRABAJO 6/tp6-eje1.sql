@@ -169,6 +169,9 @@ ADD CONSTRAINT `movimiento_ibfk_3`
   ON UPDATE NO ACTION;
 
 -- 13.	Insertar 5 movimientos distintos.
+-- ACLARACIÓ: CARGAR PRIMERO UN CLIENTE, SINO TIRA ERROR 
+
+-- INSERTAR MOVIMIENTOS
 INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('10', '10', '2022-10-10', '1', '1', '1', '2022-10-10 12:00:00', 'ingreso');
 INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('14', '5', '2022-10-12', '1', '1', '1', '2022-10-12 10:00:00', 'egreso');
 INSERT INTO `elsistema`.`movimientos` (`id`, `cantidad`, `fecha`, `id_cliente`, `id_vendedor`, `id_producto`, `tms`, `tipo_movimiento`) VALUES ('15', '10', '2022-10-14', '1', '1', '1', '2022-10-14 12:00:00', 'ingreso');
