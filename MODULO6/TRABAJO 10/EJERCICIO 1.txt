@@ -1,0 +1,28 @@
+Ejercicio 1:
+1 - Describe dos usos o funciones que proporciona la declaración DOCTYPE en una página web.
+        DOCTYPE> informa al navegador qué versión de HTML (o XML) se usó para escribir el documento. Doctype es una declaración no una etiqueta. Además, podemos referirnos a ella como "document type declaration" o por las siglas "DTD".
+b - Para que se utilizan las siguientes etiquetas:.
+        <head></head> 	Define un documento HTML
+        <title></title> Para escribir el título del documento. Se escriben dentro de <head>     
+        <meta> Meta de "metainformation" - metainformación. Sirve para aportar información sobre el documento..
+        <style></style> Es el elemento donde se indica la información de estilo.
+        <body></body> Justo después de </head>. Es el contenedor del documento
+        <h1>,<h2>,<h3>,<h4>,<h5>,<h6>  Para crear títulos de párrafos, de más importante <h1> a menos <h6>
+        <a> Podremos escribir enlaces a otras páginas.
+        <strong> para marcar con especial énfasis las partes más importantes de un texto.
+        <br> Salto de linea simple.
+        <hr> Salto de línea que indica un cambio de temática entre párrafos
+        <ul> "unordered list" -lista no ordenada . crea una lista no ordenada.
+        <li> item list o elemento de lista declara cada uno de los elementos de una lista.
+        <p> Los párrafos de texto de nuestro documento
+        <span> Es un contenedor en línea. Sirve para aplicar estilo al texto o agrupar elementos en línea.
+        <table></table> Define una tabla.
+        <tr></tr> Define una fila de celdas en una tabla.
+        <td></td> Define la celda de una tabla que contiene datos.
+        <img> Representa una imagen en el documento.       
+c- La etiqueta script puede ir dentro de las etiquetas de de body o head, hay alguna diferencia donde pueda ir ?.
+	El renderizado e interpretacion del HTML se realiza a medida que el navegador encuentra los elementos en tu documento HTML. Por lo tanto si encuentra en la cabecera una etiqueta script, tendrá que esperar a que el navegador cargue el script para continuar con el renderizado de la pagina.
+        Lo más normal es colocar los scripts Javascript justo antes del cierre de la etiqueta <body>
+        Esto se hace así porque generalmente el Javascript tiene que ponerse en marcha cuando el navegador ha procesado el HTML. No sirve de mucho que el navegador procese el Javascript cuando el usario todavía no ha podido ver el contenido de la página. Además, el Javascript muchas veces debe operar con los elementos de la página, para modificarlos dinámicamente y ésto se tiene que hacer cuando los elementos han sido cargados por el navegador. Por todo ello se suele poner en la mayoría de los casos antes de cerrar la etiqueta <body>.
+        Poner los scripts en el <head> puede hacer que el navegador se entretenga descargando Javascript que no necesita ejecutar previamente a la carga del contenido de la página, lo que puede reducir el tiempo de carga y por lo tanto el rendimiento. Dependiendo del tamaño del código Javascript y del número de archivos que se deban cargar, esto puede ser más o menos representativo, pero la optimización de colocar los scripts antes del </body> no suele estar de más.
+            
